@@ -1,16 +1,32 @@
-namespace HumanBehavior.Core.Models;
+using System;
 
-public enum ScrollDirection
+namespace HumanBehavior.Core.Models
 {
-    Up,
-    Down
-}
+    public enum ScrollDirection
+    {
+        Up,
+        Down
+    }
 
-/// <summary>
-/// Encapsulates a scroll amount and direction, plus optional pauses.
-/// </summary>
-public sealed record ScrollPlan(ScrollDirection Direction, double Pixels, TimeSpan Duration)
-{
-    public override string ToString() => $"{Direction} {Pixels:0}px";
-}
+    /// <summary>
+    /// Encapsulates a scroll amount and direction, plus optional pauses.
+    /// </summary>
+    public sealed class ScrollPlan
+    {
+        public ScrollDirection Direction { get; }
+        public double Pixels { get; }
+        public TimeSpan Duration { get; }
 
+        public ScrollPlan(ScrollDirection direction, double pixels, TimeSpan duration)
+        {
+            Direction = direction;
+            Pixels = pixels;
+            Duration = duration;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1:0}px", Direction, Pixels);
+        }
+    }
+}

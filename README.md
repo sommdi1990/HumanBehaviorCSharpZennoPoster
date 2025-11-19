@@ -1,66 +1,119 @@
-# HumanBehavior (ZennoPoster Helper)
+# HumanBehavior - شبیه‌ساز رفتار انسانی برای ZennoPoster
 
-Simulation helpers to bring more human-like randomness (scrolls, clicks, hovers and idle pauses) into ZennoPoster automations. The resulting DLL can be referenced directly from ProjectMaker scripts or any other .NET host.
+یک کتابخانه C# برای شبیه‌سازی رفتارهای تصادفی انسانی (کلیک، هاور، اسکرول، مکث) در ZennoPoster.
 
-## Quick start
+## مشخصات پروژه
 
-```bash
-# From the workspace root
-/home/soroush/.dotnet/dotnet build
+- **Target Framework**: .NET Framework 4.6.2
+- **زبان**: C# 7.3
+- **وابستگی‌ها**: Newtonsoft.Json 13.0.3
+
+## ساختار پروژه
+
+```
+src/HumanBehavior.Core/
+├── Abstractions/
+│   └── IInteractionSurface.cs      # رابط برای سطح تعامل
+├── Adapters/
+│   └── ZennoPosterSurface.cs       # آداپتر ZennoPoster
+├── Models/                          # مدل‌های داده
+├── Internal/                        # کلاس‌های داخلی
+└── HumanBehaviorSimulator.cs        # کلاس اصلی شبیه‌ساز
 ```
 
-The build produces `HumanBehavior.dll` for both `netstandard2.0` and `net8.0` under `src/HumanBehavior.Core/bin/Debug`.
+## نحوه بیلد
 
-## Project layout
+### در Windows با Visual Studio
 
-| Path | Description |
-| --- | --- |
-| `src/HumanBehavior.Core` | Multi-targeted class library (netstandard2.0 + net8.0). |
-| `Abstractions/IInteractionSurface.cs` | Interface that bridges the simulator with ZennoPoster (or any automation runtime). |
-| `HumanBehaviorSimulator.cs` | Orchestrates randomized action plans. |
-| `Models/*` | Lightweight DTOs describing UI elements, scroll plans and tuning knobs. |
-| `Internal/*` | Randomness helpers and the action planner. |
+1. پروژه را در Visual Studio 2019 یا 2022 باز کنید
+2. روی پروژه راست‌کلیک کنید → **Build**
+3. DLL در مسیر `bin/Debug/` یا `bin/Release/` ساخته می‌شود
 
-## Usage
+### در Windows با MSBuild (Command Line)
 
-1. Implement `IInteractionSurface` using ZennoPoster APIs (buttons discovery, scrolling, clicking). ZennoPoster already exposes browser automation primitives, so the adapter simply forwards simulator requests to ProjectMaker blocks. [ZennoPoster automates anything a user can do in a browser, which makes it ideal for this type of adapter](https://zennolab.com/en/products/zennoposter/).
-2. Instantiate the simulator (now that `ZennoPosterSurface` exists):
+```cmd
+msbuild src/HumanBehavior.Core/HumanBehavior.Core.csproj /p:Configuration=Release
+```
+
+### در Linux (نیاز به Mono/MSBuild)
+
+```bash
+# نصب Mono (اگر نصب نیست)
+sudo apt-get install mono-complete msbuild
+
+# بیلد پروژه
+msbuild src/HumanBehavior.Core/HumanBehavior.Core.csproj /p:Configuration=Release
+```
+
+## استفاده در ZennoPoster
+
+### 1. اضافه کردن DLL به پروژه
+
+1. فایل `HumanBehavior.dll` را در پوشه پروژه ZennoPoster کپی کنید
+2. در ProjectMaker، به **Blocks** → **C# Code** بروید
+3. DLL را به پروژه اضافه کنید
+
+### 2. کد نمونه
 
 ```csharp
-var surface = new ZennoPosterSurface(instance); // your implementation
+using HumanBehavior.Core;
+using HumanBehavior.Core.Adapters;
+using HumanBehavior.Core.Models;
+using System;
+using System.Threading.Tasks;
+
+// instance همان آبجکت ZennoPoster است که به بلاک تزریق می‌شود
+var surface = new ZennoPosterSurface(instance);
+
 var options = new HumanBehaviorOptions
 {
     ClickBias = 0.45,
     ScrollBias = 0.25,
     HoverBias = 0.2,
     PauseBias = 0.1,
+    PointerNoiseInPixels = 10,
+    MaxActionsPerRun = 20
 };
 
-var simulator = new HumanBehaviorSimulator(surface, options, Console.WriteLine);
-await simulator.RunAsync(actionBudget: 15, cancellationToken);
+var simulator = new HumanBehaviorSimulator(
+    surface, 
+    options, 
+    msg => project.SendInfoToLog(msg, true)
+);
+
+// اجرای 15 عمل تصادفی
+await simulator.RunAsync(actionBudget: 15);
+
+// یا اجرا برای مدت زمان مشخص
+// await simulator.RunAsync(TimeSpan.FromSeconds(30));
 ```
 
-3. Ship the compiled `HumanBehavior.dll` alongside your ZennoPoster project and load it through the C# code block inside ProjectMaker or via the `RunDll` action.
+## تنظیمات (HumanBehaviorOptions)
 
-## Customizing behavior
+- **ClickBias**: احتمال کلیک (پیش‌فرض: 0.4)
+- **ScrollBias**: احتمال اسکرول (پیش‌فرض: 0.3)
+- **HoverBias**: احتمال هاور (پیش‌فرض: 0.2)
+- **PauseBias**: احتمال مکث (پیش‌فرض: 0.1)
+- **PointerNoiseInPixels**: نویز تصادفی برای موقعیت ماوس (پیش‌فرض: 8)
+- **MaxActionsPerRun**: حداکثر تعداد عمل در هر اجرا (پیش‌فرض: 25)
+- **MinPauseBetweenActions**: حداقل زمان بین اعمال (پیش‌فرض: 900ms)
+- **MaxPauseBetweenActions**: حداکثر زمان بین اعمال (پیش‌فرض: 2400ms)
 
-- `HumanBehaviorOptions` lets you tweak weights, jitter, and durations to mimic different personas (slow reader, speedy scroller, etc.).
-- Implementations can feed richer metadata into each `UiElement` (roles, labels, confidence scores) so the planner favors meaningful targets.
-- Use the diagnostics sink to pipe traces into ZennoPoster logs for debugging sequences.
+## ویژگی‌ها
 
-## Testing locally (Linux)
+- ✅ شناسایی خودکار دکمه‌ها و لینک‌های صفحه
+- ✅ کلیک‌های تصادفی با نویز طبیعی
+- ✅ اسکرول‌های نرم و تصادفی
+- ✅ هاور روی عناصر
+- ✅ مکث‌های تصادفی بین اعمال
+- ✅ پشتیبانی کامل از ZennoPoster API
 
-The repo bundles a local .NET 8 SDK under `~/.dotnet`. If you need a clean rebuild:
+## نکات مهم
 
-```bash
-rm -rf /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/bin \
-       /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj
-/home/soroush/.dotnet/dotnet build
-```
+- این پروژه برای .NET Framework 4.6.2 طراحی شده است
+- از `dynamic` برای ارتباط با ZennoPoster استفاده می‌کند (بدون نیاز به reference مستقیم)
+- در زمان اجرا، ZennoPoster آبجکت `instance` را تزریق می‌کند
 
-To produce a release DLL:
+## لایسنس
 
-```bash
-/home/soroush/.dotnet/dotnet build --configuration Release
-```
-
+این پروژه برای استفاده در پروژه‌های ZennoPoster طراحی شده است.

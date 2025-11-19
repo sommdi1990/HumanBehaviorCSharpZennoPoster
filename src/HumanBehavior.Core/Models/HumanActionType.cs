@@ -1,10 +1,10 @@
-namespace HumanBehavior.Core.Models;
-
-public enum HumanActionType
+namespace HumanBehavior.Core.Models
 {
-    Click,
-    Hover,
-    Scroll,
-    Pause
+    public enum HumanActionType
+    {
+        Click,
+        Hover,
+        Scroll,
+        Pause
+    }
 }
-

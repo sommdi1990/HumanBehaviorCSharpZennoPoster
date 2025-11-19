@@ -1,62 +1,67 @@
+using System;
 using System.Security.Cryptography;
 
-namespace HumanBehavior.Core.Internal;
-
-internal static class Entropy
+namespace HumanBehavior.Core.Internal
 {
-    private static readonly RandomNumberGenerator Rng = RandomNumberGenerator.Create();
-
-    public static double NextDouble()
+    internal static class Entropy
     {
-        var value = NextUInt32();
-        return value / (double)uint.MaxValue;
-    }
+        private static readonly RandomNumberGenerator Rng = RandomNumberGenerator.Create();
 
-    public static double NextDouble(double min, double max)
-    {
-        if (min > max)
+        public static double NextDouble()
         {
-            (min, max) = (max, min);
+            var value = NextUInt32();
+            return value / (double)uint.MaxValue;
         }
 
-        return min + (max - min) * NextDouble();
-    }
-
-    public static int NextInt(int minInclusive, int maxExclusive)
-    {
-        if (minInclusive >= maxExclusive)
+        public static double NextDouble(double min, double max)
         {
-            throw new ArgumentOutOfRangeException(nameof(maxExclusive), "maxExclusive must be greater than minInclusive");
+            if (min > max)
+            {
+                var temp = min;
+                min = max;
+                max = temp;
+            }
+
+            return min + (max - min) * NextDouble();
         }
 
-        var range = (long)maxExclusive - minInclusive;
-        var limit = uint.MaxValue - (uint.MaxValue % (uint)range);
-        uint value;
-
-        do
+        public static int NextInt(int minInclusive, int maxExclusive)
         {
-            value = NextUInt32();
-        } while (value >= limit);
+            if (minInclusive >= maxExclusive)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxExclusive), "maxExclusive must be greater than minInclusive");
+            }
 
-        return (int)(minInclusive + (value % range));
-    }
+            var range = (long)maxExclusive - minInclusive;
+            var limit = uint.MaxValue - (uint.MaxValue % (uint)range);
+            uint value;
 
-    public static TimeSpan NextTimeSpan(TimeSpan min, TimeSpan max)
-    {
-        if (min > max)
-        {
-            (min, max) = (max, min);
+            do
+            {
+                value = NextUInt32();
+            } while (value >= limit);
+
+            return (int)(minInclusive + (value % range));
         }
 
-        var ticks = NextDouble(min.Ticks, max.Ticks);
-        return TimeSpan.FromTicks((long)ticks);
-    }
+        public static TimeSpan NextTimeSpan(TimeSpan min, TimeSpan max)
+        {
+            if (min > max)
+            {
+                var temp = min;
+                min = max;
+                max = temp;
+            }
 
-    private static uint NextUInt32()
-    {
-        var buffer = new byte[4];
-        Rng.GetBytes(buffer);
-        return BitConverter.ToUInt32(buffer, 0);
+            var ticks = NextDouble(min.Ticks, max.Ticks);
+            return TimeSpan.FromTicks((long)ticks);
+        }
+
+        private static uint NextUInt32()
+        {
+            var buffer = new byte[4];
+            Rng.GetBytes(buffer);
+            return BitConverter.ToUInt32(buffer, 0);
+        }
     }
 }
-
