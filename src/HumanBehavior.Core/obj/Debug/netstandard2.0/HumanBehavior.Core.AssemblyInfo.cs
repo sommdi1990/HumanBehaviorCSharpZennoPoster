@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Randomized human-behavior helpers for ZennoPoster projects.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a59c0d223cfe78e9f609c5bb632e2b21f66de4de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13cf707bf29e77f81161ab35f40db1c9abd5d1b2")]
 [assembly: System.Reflection.AssemblyProductAttribute("HumanBehavior")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HumanBehavior")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
