@@ -30,6 +30,20 @@
             Performs a hover or pointer settle on the element.
             </summary>
         </member>
+        <member name="T:HumanBehavior.Core.Adapters.ZennoPosterSurface">
+            <summary>
+            Reflection-based adapter that talks to a ZennoPoster <c>Instance</c> via dynamic dispatch.
+            Works both inside ProjectMaker (C# code block) and external DLLs loaded through ZennoPoster.
+            </summary>
+            <remarks>
+            Because this project is built on Linux (without ZennoPoster assemblies), we rely on dynamic calls.
+            At runtime ZennoPoster injects the real COM objects, so the methods this class invokes (ActiveTab, ExecuteJs, etc.)
+            map to the official API.
+            </remarks>
+        </member>
+        <member name="M:HumanBehavior.Core.Adapters.ZennoPosterSurface.#ctor(System.Object)">
+            <param name="instance">ZennoPoster instance object that exposes <c>ActiveTab</c>.</param>
+        </member>
         <member name="T:HumanBehavior.Core.HumanBehaviorSimulator">
             <summary>
             Coordinates randomized human-like actions (scrolls, hovers, clicks, pauses).

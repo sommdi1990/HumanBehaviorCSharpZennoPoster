@@ -10,3 +10,4 @@
 /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/netstandard2.0/HumanBehavior.dll
 /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/netstandard2.0/HumanBehavior.xml
 /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/netstandard2.0/HumanBehavior.pdb
+/home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/netstandard2.0/HumanBehavior.Core.sourcelink.json

@@ -11,3 +11,4 @@
 /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/net8.0/HumanBehavior.xml
 /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/net8.0/HumanBehavior.pdb
 /home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/net8.0/ref/HumanBehavior.dll
+/home/soroush/CSharp/HumanBehavior/src/HumanBehavior.Core/obj/Debug/net8.0/HumanBehavior.Core.sourcelink.json

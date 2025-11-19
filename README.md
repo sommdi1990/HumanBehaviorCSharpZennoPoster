@@ -24,7 +24,7 @@ The build produces `HumanBehavior.dll` for both `netstandard2.0` and `net8.0` un
 ## Usage
 
 1. Implement `IInteractionSurface` using ZennoPoster APIs (buttons discovery, scrolling, clicking). ZennoPoster already exposes browser automation primitives, so the adapter simply forwards simulator requests to ProjectMaker blocks. [ZennoPoster automates anything a user can do in a browser, which makes it ideal for this type of adapter](https://zennolab.com/en/products/zennoposter/).
-2. Instantiate the simulator:
+2. Instantiate the simulator (now that `ZennoPosterSurface` exists):
 
 ```csharp
 var surface = new ZennoPosterSurface(instance); // your implementation
