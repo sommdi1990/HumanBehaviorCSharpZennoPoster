@@ -117,3 +117,79 @@ await simulator.RunAsync(actionBudget: 15);
 ## لایسنس
 
 این پروژه برای استفاده در پروژه‌های ZennoPoster طراحی شده است.
+
+
+
+### داخل SharedCode:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.IO;
+using System.Text.RegularExpressions;
+using ZennoLab.CommandCenter;
+using ZennoLab.InterfacesLibrary;
+using ZennoLab.InterfacesLibrary.ProjectModel;
+using ZennoLab.InterfacesLibrary.ProjectModel.Collections;
+using ZennoLab.InterfacesLibrary.ProjectModel.Enums;
+using ZennoLab.Macros;
+using Global.ZennoExtensions;
+using ZennoLab.Emulation;
+using ZennoLab.CommandCenter.TouchEvents;
+using ZennoLab.CommandCenter.FullEmulation;
+using ZennoLab.InterfacesLibrary.Enums;
+using HumanBehavior.Core;
+using HumanBehavior.Core.Models;
+using HumanBehavior.Core.Adapters;
+
+
+namespace ZennoLab.OwnCode
+{
+	/// <summary>
+	/// A simple class of the common code
+	/// </summary>
+	public class CommonCode
+	{
+		/// <summary>
+		/// Lock this object to mark part of code for single thread execution
+		/// </summary>
+		public static object SyncObject = new object();
+
+		public static void SimulateHumanBehavior(Instance instance, IZennoPosterProjectModel project)
+		{
+		    try
+		    {
+		        var surface = new ZennoPosterSurface(instance);
+		        var options = new HumanBehaviorOptions
+		        {
+		            ClickBias = 0.45,
+		            ScrollBias = 0.25,
+		            HoverBias = 0.2,
+		            PauseBias = 0.1,
+		            PointerNoiseInPixels = 10
+		        };
+		
+		        var simulator = new HumanBehaviorSimulator(surface, options, msg => project.SendInfoToLog(msg));
+		        
+		        // اجرای سناریو با بودجه عملیاتی
+		        simulator.RunAsync(actionBudget: 15).GetAwaiter().GetResult();
+		        
+		        // یا استفاده از زمان‌بندی:
+		        // simulator.RunAsync(TimeSpan.FromSeconds(30)).GetAwaiter().GetResult();
+		    }
+		    catch (Exception ex)
+		    {
+				project.SendInfoToLog("Error Human Behavior: " + ex.Message);
+		    }
+		}
+		// Insert your code here
+	}
+}
+
+```
