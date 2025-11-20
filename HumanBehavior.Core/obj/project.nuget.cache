@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "pGTdFHZ1dzY=",
+  "success": true,
+  "projectFilePath": "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net462\\1.0.0\\microsoft.netframework.referenceassemblies.net462.1.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1604",
+      "level": "Warning",
+      "message": "Project dependency Microsoft.NETFramework.ReferenceAssemblies does not contain an inclusive lower bound. Include a lower bound in the dependency version to ensure consistent restore results.",
+      "projectPath": "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj",
+      "libraryId": "Microsoft.NETFramework.ReferenceAssemblies",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.6.2"
+      ]
+    }
+  ]
+}

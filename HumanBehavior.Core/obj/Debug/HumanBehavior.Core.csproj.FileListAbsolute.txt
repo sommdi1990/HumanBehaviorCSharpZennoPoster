@@ -1,0 +1,8 @@
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\obj\Debug\HumanBehavior.Core.csproj.AssemblyReference.cache
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\obj\Debug\HumanBehavior.Core.csproj.CoreCompileInputs.cache
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\bin\Debug\HumanBehavior.Core.dll
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\bin\Debug\HumanBehavior.Core.pdb
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\bin\Debug\Newtonsoft.Json.dll
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\obj\Debug\HumanBeh.F6DDF23E.Up2Date
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\obj\Debug\HumanBehavior.Core.dll
+C:\ZennoPoster202511021913\zennolab\MultiProxy\SquarespaceMultiProxy\HumanBehaviorCSharpZennoPoster\HumanBehavior.Core\obj\Debug\HumanBehavior.Core.pdb

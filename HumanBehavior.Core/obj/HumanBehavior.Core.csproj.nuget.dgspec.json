@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj": {}
+  },
+  "projects": {
+    "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj",
+        "projectName": "HumanBehavior.Core",
+        "projectPath": "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\HumanBehavior.Core.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\ZennoPoster202511021913\\zennolab\\MultiProxy\\SquarespaceMultiProxy\\HumanBehaviorCSharpZennoPoster\\HumanBehavior.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net462"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net462": {
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net462": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "include": "Build",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "(, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
